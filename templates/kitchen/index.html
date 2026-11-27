@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Огляд{% endblock %}
+{% block content %}
+  <section class="hero">
+    <div>
+      <h1>Кухня ресторану</h1>
+      <p>Страви, типи меню та команда кухарів.</p>
+      <a class="button" href="{% url 'kitchen:dish-create' %}">Додати страву</a>
+    </div>
+    <div class="hero-mark" aria-hidden="true">✳</div>
+  </section>
+  <div class="stats">
+    <a class="stat" href="{% url 'kitchen:dish-list' %}"><span>Страви</span><strong>{{ num_dishes }}</strong></a>
+    <a class="stat"
+       href="{% url 'kitchen:dish-type-list' %}"><span>Типи страв</span><strong>{{ num_dish_types }}</strong></a>
+    <a class="stat" href="{% url 'kitchen:cook-list' %}"><span>Кухарі</span><strong>{{ num_cooks }}</strong></a>
+  </div>
+  <p class="muted">Відвідувань огляду за цей сеанс: {{ num_visits }}</p>
+{% endblock %}
