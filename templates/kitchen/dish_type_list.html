@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Типи страв{% endblock %}
+{% block content %}
+  <header class="page-head">
+    <h1>Типи страв</h1>
+    <a class="button" href="{% url 'kitchen:dish-type-create' %}">Додати тип</a>
+  </header>
+  {% include "includes/search.html" with list_route="kitchen:dish-type-list" search_label="Пошук типу страви за назвою" %}
+  <ul class="records">
+    {% for item in dish_type_list %}
+      <li class="record">
+        <span class="record-name">{{ item.name }}</span>
+
+        <div class="actions">
+          <a href="{% url 'kitchen:dish-type-update' item.pk %}" aria-label="Редагувати {{ item }}">Редагувати</a>
+          <a class="danger-link" href="{% url 'kitchen:dish-type-delete' item.pk %}" aria-label="Видалити {{ item }}">Видалити</a>
+        </div>
+      </li>
+    {% empty %}
+      <li class="empty">{% if request.GET.name or request.GET.username %}Збігів немає.{% else %}Тут ще немає
+        записів.{% endif %}</li>
+    {% endfor %}
+  </ul>
+  {% include "includes/pagination.html" %}
+{% endblock %}

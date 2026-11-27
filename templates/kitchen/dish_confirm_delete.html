@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Видалити страву{% endblock %}
+{% block content %}
+  <a class="back" href="{% url 'kitchen:dish-list' %}">Страви</a>
+  <h1>Видалити страву?</h1>
+  <form method="post" class="panel form-panel">
+    {% csrf_token %}
+    <p>Буде видалено <strong>«{{ object.name }}»</strong>.</p>
+    <div class="actions">
+      <button class="button danger" type="submit">Видалити</button>
+      <a class="button quiet" href="{% url 'kitchen:dish-list' %}">Скасувати</a>
+    </div>
+  </form>
+{% endblock %}

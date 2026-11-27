@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Кухарі{% endblock %}
+{% block content %}
+  <header class="page-head">
+    <h1>Кухарі</h1>
+    <a class="button" href="{% url 'kitchen:cook-create' %}">Додати кухаря</a>
+  </header>
+  {% include "includes/search.html" with list_route="kitchen:cook-list" search_label="Пошук кухаря за логіном" %}
+  <ul class="records">
+    {% for item in cook_list %}
+      <li class="record">
+        <a class="record-name"
+           href="{% url 'kitchen:cook-detail' item.pk %}">{{ item.get_full_name|default:item.username }}</a>
+        <div class="record-meta"><span
+            class="muted">@{{ item.username }}</span><span>{{ item.years_of_experience|default_if_none:'—' }} <span
+            class="muted">· стаж (роки)</span></span></div>
+        <div class="actions">
+          <a href="{% url 'kitchen:cook-update' item.pk %}" aria-label="Редагувати {{ item }}">Редагувати</a>
+          <a class="danger-link" href="{% url 'kitchen:cook-delete' item.pk %}" aria-label="Видалити {{ item }}">Видалити</a>
+        </div>
+      </li>
+    {% empty %}
+      <li class="empty">{% if request.GET.name or request.GET.username %}Збігів немає.{% else %}Тут ще немає
+        записів.{% endif %}</li>
+    {% endfor %}
+  </ul>
+  {% include "includes/pagination.html" %}
+{% endblock %}
