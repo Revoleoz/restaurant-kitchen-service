@@ -1,0 +1,11 @@
+<form method="get" role="search" class="search">
+  {% for field in search_form %}
+    <label class="sr-only" for="{{ field.id_for_label }}">{{ search_label }}</label>
+    {{ field }}
+    {{ field.errors }}
+  {% endfor %}
+  <button class="button quiet" type="submit">Знайти</button>
+  {% if request.GET.name or request.GET.username %}
+    <a href="{% url list_route %}">Скинути пошук</a>
+  {% endif %}
+</form>

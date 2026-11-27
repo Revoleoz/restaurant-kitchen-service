@@ -1,0 +1,12 @@
+{% load query_transform %}
+{% if is_paginated %}
+  <nav class="pagination" aria-label="Сторінки результатів">
+    {% if page_obj.has_previous %}
+      <a class="button quiet" href="?{% query_transform request page=page_obj.previous_page_number %}">Назад</a>
+    {% endif %}
+    <span>Сторінка {{ page_obj.number }} з {{ paginator.num_pages }}</span>
+    {% if page_obj.has_next %}
+      <a class="button quiet" href="?{% query_transform request page=page_obj.next_page_number %}">Далі</a>
+    {% endif %}
+  </nav>
+{% endif %}
