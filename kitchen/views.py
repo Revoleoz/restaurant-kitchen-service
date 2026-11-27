@@ -1,3 +1,6 @@
+import re
+
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
@@ -55,7 +58,9 @@ class DishTypesListView(LoginRequiredMixin, generic.ListView):
         queryset = super().get_queryset()
         form = DishTypeSearchForm(self.request.GET)
         if form.is_valid():
-            queryset = queryset.filter(name__icontains=form.cleaned_data["name"])
+            query = form.cleaned_data["name"]
+            if query:
+                queryset = queryset.filter(name__iregex=re.escape(query))
         return queryset
 
 
@@ -96,7 +101,9 @@ class DishListView(LoginRequiredMixin, generic.ListView):
         queryset = Dish.objects.select_related("dish_type")
         form = DishSearchForm(self.request.GET)
         if form.is_valid():
-            queryset = queryset.filter(name__icontains=form.cleaned_data["name"])
+            query = form.cleaned_data["name"]
+            if query:
+                queryset = queryset.filter(name__iregex=re.escape(query))
         return queryset
 
 
@@ -136,7 +143,14 @@ class CookListView(LoginRequiredMixin, generic.ListView):
         queryset = Cook.objects.prefetch_related("cooks__dish_type")
         form = CookSearchForm(self.request.GET)
         if form.is_valid():
-            return queryset.filter(username__icontains=form.cleaned_data["username"])
+            query = form.cleaned_data["username"]
+            if query:
+                pattern = re.escape(query)
+                return queryset.filter(
+                    Q(username__iregex=pattern)
+                    | Q(first_name__iregex=pattern)
+                    | Q(last_name__iregex=pattern)
+                )
         return queryset
 
 

@@ -53,7 +53,7 @@ class CookSearchForm(forms.Form):
         required=False,
         label="",
         widget=forms.TextInput(
-            attrs={"placeholder": "Search by username"}
+            attrs={"placeholder": "Пошук за Ім'ям/Призвищем"}
         )
     )
 
@@ -64,7 +64,7 @@ class DishSearchForm(forms.Form):
         required=False,
         label="",
         widget=forms.TextInput(
-            attrs={"placeholder": "Search by name"}
+            attrs={"placeholder": "Пошук за назвою"}
         )
     )
 
@@ -74,6 +74,6 @@ class DishTypeSearchForm(forms.Form):
         required=False,
         label="",
         widget=forms.TextInput(
-            attrs={"placeholder": "Search by name"}
+            attrs={"placeholder": "Пошук за назвою"}
         )
     )
