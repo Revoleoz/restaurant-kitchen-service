@@ -17,10 +17,12 @@ class DishForm(forms.ModelForm):
 
 
 def validate_years_of_experience(years_of_experience):
+    if years_of_experience is None:
+        return None
     if years_of_experience < 0:
         raise ValidationError("Years of experience must be greater than or equal 0")
     if years_of_experience > 150:
-        raise ValidationError("Years of experience must be less than 150 (People don't live that long)")
+        raise ValidationError("Years of experience must be less than 150 (People dont live that long)")
     return years_of_experience
 
 class CookCreationForm(UserCreationForm):
@@ -45,7 +47,7 @@ class CookYearsOfExperienceUpdateForm(forms.ModelForm):
         return validate_years_of_experience(self.cleaned_data["years_of_experience"])
 
 
-class CookSearchForm(forms.ModelForm):
+class CookSearchForm(forms.Form):
     username = forms.CharField(
         max_length=255,
         required=False,
@@ -56,7 +58,7 @@ class CookSearchForm(forms.ModelForm):
     )
 
 
-class DishSearchForm(forms.ModelForm):
+class DishSearchForm(forms.Form):
     name = forms.CharField(
         max_length=255,
         required=False,
@@ -66,7 +68,7 @@ class DishSearchForm(forms.ModelForm):
         )
     )
 
-class DishTypeSearchForm(forms.ModelForm):
+class DishTypeSearchForm(forms.Form):
     name = forms.CharField(
         max_length=255,
         required=False,
