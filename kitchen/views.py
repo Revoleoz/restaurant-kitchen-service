@@ -1,11 +1,11 @@
 import re
 
 from django.db.models import Q
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, redirect
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
+from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
@@ -20,6 +20,7 @@ from .forms import (
     CookYearsOfExperienceUpdateForm,
 )
 
+
 @login_required
 def index(request: HttpRequest) -> HttpResponse:
     """View function for the home page of the site."""
@@ -30,7 +31,7 @@ def index(request: HttpRequest) -> HttpResponse:
     num_visits = request.session.get("num_visits", 0)
     request.session["num_visits"] = num_visits + 1
 
-    context= {
+    context = {
         "num_dishes": num_dishes,
         "num_cooks": num_cooks,
         "num_dish_types": num_dish_types,
@@ -46,7 +47,7 @@ class DishTypesListView(LoginRequiredMixin, generic.ListView):
     template_name = "kitchen/dish_type_list.html"
     paginate_by = 5
 
-    def get_context_data(self, object_list=None , **kwargs):
+    def get_context_data(self, object_list=None, **kwargs):
         context = super(DishTypesListView, self).get_context_data(**kwargs)
         name = self.request.GET.get("name", "")
         context["search_form"] = DishTypeSearchForm(
@@ -89,7 +90,7 @@ class DishListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 5
     template_name = "kitchen/dish_list.html"
 
-    def get_context_data(self, object_list=None , **kwargs):
+    def get_context_data(self, object_list=None, **kwargs):
         context = super(DishListView, self).get_context_data(**kwargs)
         name = self.request.GET.get("name", "")
         context["search_form"] = DishSearchForm(
@@ -127,11 +128,12 @@ class DishDeleteView(LoginRequiredMixin, generic.DeleteView):
 class DishDetailView(LoginRequiredMixin, generic.DetailView):
     model = Dish
 
+
 class CookListView(LoginRequiredMixin, generic.ListView):
     model = Cook
     paginate_by = 5
 
-    def get_context_data(self, object_list=None , **kwargs):
+    def get_context_data(self, object_list=None, **kwargs):
         context = super(CookListView, self).get_context_data(**kwargs)
         username = self.request.GET.get("username", "")
         context["search_form"] = CookSearchForm(
@@ -172,6 +174,7 @@ class CookDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 class CookDetailView(LoginRequiredMixin, generic.DetailView):
     model = Cook
+
 
 @login_required
 @require_POST

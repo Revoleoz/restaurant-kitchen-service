@@ -11,6 +11,7 @@ class DishForm(forms.ModelForm):
         queryset=get_user_model().objects.all(),
         widget=forms.CheckboxSelectMultiple,
     )
+
     class Meta:
         model = Dish
         fields = "__all__"
@@ -20,10 +21,16 @@ def validate_years_of_experience(years_of_experience):
     if years_of_experience is None:
         return None
     if years_of_experience < 0:
-        raise ValidationError("Years of experience must be greater than or equal 0")
+        raise ValidationError(
+            "Years of experience must be greater than or equal 0"
+        )
     if years_of_experience > 150:
-        raise ValidationError("Years of experience must be less than 150 (People dont live that long)")
+        raise ValidationError(
+            "Years of experience must be"
+            " less than 150 (People dont live that long)"
+        )
     return years_of_experience
+
 
 class CookCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
@@ -35,7 +42,9 @@ class CookCreationForm(UserCreationForm):
         )
 
     def clean_years_of_experience(self):
-        return validate_years_of_experience(self.cleaned_data["years_of_experience"])
+        return validate_years_of_experience(
+            self.cleaned_data["years_of_experience"]
+        )
 
 
 class CookYearsOfExperienceUpdateForm(forms.ModelForm):
@@ -44,7 +53,9 @@ class CookYearsOfExperienceUpdateForm(forms.ModelForm):
         fields = ["years_of_experience"]
 
     def clean_years_of_experience(self):
-        return validate_years_of_experience(self.cleaned_data["years_of_experience"])
+        return validate_years_of_experience(
+            self.cleaned_data["years_of_experience"]
+        )
 
 
 class CookSearchForm(forms.Form):
@@ -67,6 +78,7 @@ class DishSearchForm(forms.Form):
             attrs={"placeholder": "Пошук за назвою"}
         )
     )
+
 
 class DishTypeSearchForm(forms.Form):
     name = forms.CharField(

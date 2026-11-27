@@ -36,7 +36,9 @@ class Dish(models.Model):
         DishType,
         on_delete=models.CASCADE,
         related_name="dishes")
-    cooks = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="cooks")
+    cooks = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, related_name="cooks"
+    )
 
     def get_absolute_url(self):
         return reverse("kitchen:dish-detail", args=[str(self.id)])
@@ -45,4 +47,6 @@ class Dish(models.Model):
         ordering = ("name", )
 
     def __str__(self):
-        return f"{self.name} (price: {self.price}), dish type: {self.dish_type}"
+        return (f"{self.name} "
+                f"(price: {self.price}), dish type: {self.dish_type}"
+                )

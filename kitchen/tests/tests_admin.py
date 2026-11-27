@@ -14,7 +14,8 @@ class CookAdminTests(TestCase):
 
         response = self.client.get(reverse("admin:kitchen_cook_changelist"))
         self.assertContains(response, cook.username)
-        self.assertIn("years_of_experience", response.context["cl"].list_display)
+        self.assertIn("years_of_experience",
+                      response.context["cl"].list_display)
 
         response = self.client.get(
             reverse("admin:kitchen_cook_change", args=[cook.pk])
