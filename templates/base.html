@@ -1,0 +1,17 @@
+{% load static %}
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Кухня{% endblock %} | Mise en place</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+<a class="skip" href="#main">Перейти до вмісту</a>
+{% include "includes/sidebar.html" %}
+<main id="main" class="workspace{% if not user.is_authenticated %} guest{% endif %}">
+  {% block content %}{% endblock %}
+</main>
+</body>
+</html>

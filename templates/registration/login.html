@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Вхід{% endblock %}
+{% block content %}
+  <article class="panel auth-panel">
+    <h1>Вхід до кухні</h1>
+    <form method="post">
+      {% csrf_token %}
+      {% include "includes/form_fields.html" %}
+      {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
+      <button class="button" type="submit">Увійти</button>
+    </form>
+  </article>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Страви{% endblock %}
+{% block content %}
+  <header class="page-head">
+    <h1>Страви</h1>
+    <a class="button" href="{% url 'kitchen:dish-create' %}">Додати страву</a>
+  </header>
+  {% include "includes/search.html" with list_route="kitchen:dish-list" search_label="Пошук страви за назвою" %}
+  <ul class="records">
+    {% for item in dish_list %}
+      <li class="record">
+        <a class="record-name" href="{% url 'kitchen:dish-detail' item.pk %}">{{ item.name }}</a>
+        <div class="record-meta"><span
+            class="pill">{{ item.dish_type.name }}</span><strong>{{ item.price|floatformat:2 }} ₴</strong></div>
+        <div class="actions">
+          <a href="{% url 'kitchen:dish-update' item.pk %}" aria-label="Редагувати {{ item }}">Редагувати</a>
+          <a class="danger-link" href="{% url 'kitchen:dish-delete' item.pk %}" aria-label="Видалити {{ item }}">Видалити</a>
+        </div>
+      </li>
+    {% empty %}
+      <li class="empty">{% if request.GET.name or request.GET.username %}Збігів немає.{% else %}Тут ще немає
+        записів.{% endif %}</li>
+    {% endfor %}
+  </ul>
+  {% include "includes/pagination.html" %}
+{% endblock %}

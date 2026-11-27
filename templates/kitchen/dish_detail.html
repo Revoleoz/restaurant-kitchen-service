@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}{{ dish.name }}{% endblock %}
+{% block content %}
+  <a class="back" href="{% url 'kitchen:dish-list' %}">Страви</a>
+  <header class="page-head">
+    <h1>{{ dish.name }}</h1>
+    <div class="actions">
+      <a class="button quiet" href="{% url 'kitchen:dish-update' dish.pk %}">Редагувати</a>
+      <a class="button quiet danger-link" href="{% url 'kitchen:dish-delete' dish.pk %}">Видалити</a>
+    </div>
+  </header>
+  <article class="panel">
+    <span class="pill">{{ dish.dish_type.name }}</span>
+    <p class="price">{{ dish.price|floatformat:2 }} ₴</p>
+    <p class="description">{{ dish.description|default:"Опис ще не додано." }}</p>
+    <h2>Відповідальні кухарі</h2>
+    <form method="post" action="{% url 'kitchen:dish-toggle-assignment' dish.pk %}">
+      {% csrf_token %}
+      {% if user in dish.cooks.all %}
+        <button class="button quiet" type="submit" name="action" value="unassign">
+          Зняти своє призначення
+        </button>
+      {% else %}
+        <button class="button" type="submit" name="action" value="assign">
+          Призначити себе
+        </button>
+      {% endif %}
+    </form>
+    <ul class="related">
+      {% for cook in dish.cooks.all %}
+        <li><a href="{% url 'kitchen:cook-detail' cook.pk %}">{{ cook.get_full_name|default:cook.username }}</a></li>
+      {% empty %}
+        <li class="muted">Кухарів ще не призначено.</li>
+      {% endfor %}
+    </ul>
+  </article>
+{% endblock %}

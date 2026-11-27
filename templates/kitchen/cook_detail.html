@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}{{ cook.username }}{% endblock %}
+{% block content %}
+  <a class="back" href="{% url 'kitchen:cook-list' %}">Кухарі</a>
+  <header class="page-head">
+    <h1>{{ cook.get_full_name|default:cook.username }}</h1>
+    <div class="actions">
+      <a class="button quiet" href="{% url 'kitchen:cook-update' cook.pk %}">Редагувати стаж</a>
+      <a class="button quiet danger-link" href="{% url 'kitchen:cook-delete' cook.pk %}">Видалити</a>
+    </div>
+  </header>
+  <article class="panel">
+    <dl class="details">
+      <div>
+        <dt>Логін</dt>
+        <dd>@{{ cook.username }}</dd>
+      </div>
+      <div>
+        <dt>Стаж (роки)</dt>
+        <dd>{{ cook.years_of_experience|default_if_none:"Не вказано" }}</dd>
+      </div>
+    </dl>
+    <h2>Закріплені страви</h2>
+    <ul class="related">
+      {% for dish in cook.cooks.all %}
+        <li><a href="{% url 'kitchen:dish-detail' dish.pk %}">{{ dish.name }}</a> <span
+            class="pill">{{ dish.dish_type.name }}</span></li>
+      {% empty %}
+        <li class="muted">Страви ще не призначено.</li>
+      {% endfor %}
+    </ul>
+  </article>
+{% endblock %}

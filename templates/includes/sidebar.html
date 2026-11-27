@@ -1,0 +1,19 @@
+<header class="bar">
+  <a class="brand" href="{% url 'kitchen:index' %}"><span aria-hidden="true">✳</span> Mise en place</a>
+  {% if user.is_authenticated %}
+    {% with route=request.resolver_match.url_name %}
+      <nav aria-label="Основна навігація">
+        <a href="{% url 'kitchen:index' %}"{% if route == 'index' %} aria-current="page"{% endif %}>Огляд</a>
+        <a href="{% url 'kitchen:dish-list' %}"{% if route == 'dish-list' %} aria-current="page"{% endif %}>Страви</a>
+        <a href="{% url 'kitchen:dish-type-list' %}"{% if route == 'dish-type-list' %} aria-current="page"{% endif %}>Типи
+          страв</a>
+        <a href="{% url 'kitchen:cook-list' %}"{% if route == 'cook-list' %} aria-current="page"{% endif %}>Кухарі</a>
+      </nav>
+    {% endwith %}
+    <form class="account" method="post" action="{% url 'logout' %}">
+      {% csrf_token %}
+      <span>{{ user.username }}</span>
+      <button class="button quiet" type="submit">Вийти</button>
+    </form>
+  {% endif %}
+</header>

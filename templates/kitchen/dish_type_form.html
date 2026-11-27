@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}{% if object %}Редагування типу страви{% else %}Новий тип страви{% endif %}{% endblock %}
+{% block content %}
+  <a class="back" href="{% url 'kitchen:dish-type-list' %}">Типи страв</a>
+  <h1>{% if object %}Редагування типу страви{% else %}Новий тип страви{% endif %}</h1>
+  <form method="post" class="panel form-panel">
+    {% csrf_token %}
+    {% include "includes/form_fields.html" %}
+    <div class="actions">
+      <button class="button" type="submit">Зберегти</button>
+      <a class="button quiet" href="{% url 'kitchen:dish-type-list' %}">Скасувати</a>
+    </div>
+  </form>
+{% endblock %}

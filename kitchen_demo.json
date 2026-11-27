@@ -1,0 +1,262 @@
+[
+  {
+    "model": "kitchen.dishtype",
+    "pk": 9101,
+    "fields": {
+      "name": "Супи"
+    }
+  },
+  {
+    "model": "kitchen.dishtype",
+    "pk": 9102,
+    "fields": {
+      "name": "Основні страви"
+    }
+  },
+  {
+    "model": "kitchen.dishtype",
+    "pk": 9103,
+    "fields": {
+      "name": "Десерти"
+    }
+  },
+  {
+    "model": "kitchen.cook",
+    "pk": 9201,
+    "fields": {
+      "username": "demo_olena",
+      "first_name": "Олена",
+      "last_name": "Коваль",
+      "years_of_experience": 8,
+      "password": "!",
+      "is_staff": false,
+      "is_superuser": false,
+      "is_active": true,
+      "date_joined": "2026-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "kitchen.cook",
+    "pk": 9202,
+    "fields": {
+      "username": "demo_andrii",
+      "first_name": "Андрій",
+      "last_name": "Мельник",
+      "years_of_experience": 5,
+      "password": "!",
+      "is_staff": false,
+      "is_superuser": false,
+      "is_active": true,
+      "date_joined": "2026-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "kitchen.cook",
+    "pk": 9203,
+    "fields": {
+      "username": "demo_mariia",
+      "first_name": "Марія",
+      "last_name": "Бондар",
+      "years_of_experience": 11,
+      "password": "!",
+      "is_staff": false,
+      "is_superuser": false,
+      "is_active": true,
+      "date_joined": "2026-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "kitchen.cook",
+    "pk": 9204,
+    "fields": {
+      "username": "demo_taras",
+      "first_name": "Тарас",
+      "last_name": "Шевченко",
+      "years_of_experience": 3,
+      "password": "!",
+      "is_staff": false,
+      "is_superuser": false,
+      "is_active": true,
+      "date_joined": "2026-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "kitchen.cook",
+    "pk": 9205,
+    "fields": {
+      "username": "demo_sofiia",
+      "first_name": "Софія",
+      "last_name": "Кравець",
+      "years_of_experience": 0,
+      "password": "!",
+      "is_staff": false,
+      "is_superuser": false,
+      "is_active": true,
+      "date_joined": "2026-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "kitchen.dish",
+    "pk": 9301,
+    "fields": {
+      "name": "Борщ із пампушками",
+      "description": "Борщ із буряком, капустою та сметаною.",
+      "price": "165.00",
+      "dish_type": 9101,
+      "cooks": [
+        9201,
+        9202
+      ]
+    }
+  },
+  {
+    "model": "kitchen.dish",
+    "pk": 9302,
+    "fields": {
+      "name": "Грибна юшка",
+      "description": "Юшка з білими грибами та картоплею.",
+      "price": "145.00",
+      "dish_type": 9101,
+      "cooks": [
+        9203
+      ]
+    }
+  },
+  {
+    "model": "kitchen.dish",
+    "pk": 9303,
+    "fields": {
+      "name": "Крем-суп із гарбуза",
+      "description": "Гарбузовий суп із вершками та насінням.",
+      "price": "135.00",
+      "dish_type": 9101,
+      "cooks": [
+        9204,
+        9205
+      ]
+    }
+  },
+  {
+    "model": "kitchen.dish",
+    "pk": 9304,
+    "fields": {
+      "name": "Курячий бульйон",
+      "description": "Прозорий бульйон із локшиною та зеленню.",
+      "price": "120.00",
+      "dish_type": 9101,
+      "cooks": [
+        9202
+      ]
+    }
+  },
+  {
+    "model": "kitchen.dish",
+    "pk": 9305,
+    "fields": {
+      "name": "Вареники з картоплею",
+      "description": "Вареники зі смаженою цибулею та сметаною.",
+      "price": "175.00",
+      "dish_type": 9102,
+      "cooks": [
+        9201,
+        9205
+      ]
+    }
+  },
+  {
+    "model": "kitchen.dish",
+    "pk": 9306,
+    "fields": {
+      "name": "Голубці",
+      "description": "Капустяні рулети з рисом і м’ясом у томатному соусі.",
+      "price": "235.00",
+      "dish_type": 9102,
+      "cooks": [
+        9203,
+        9204
+      ]
+    }
+  },
+  {
+    "model": "kitchen.dish",
+    "pk": 9307,
+    "fields": {
+      "name": "Котлета по-київськи",
+      "description": "Куряче філе з вершковим маслом і картопляним пюре.",
+      "price": "265.00",
+      "dish_type": 9102,
+      "cooks": [
+        9202,
+        9203
+      ]
+    }
+  },
+  {
+    "model": "kitchen.dish",
+    "pk": 9308,
+    "fields": {
+      "name": "Деруни",
+      "description": "Картопляні млинці зі сметаною.",
+      "price": "160.00",
+      "dish_type": 9102,
+      "cooks": [
+        9204
+      ]
+    }
+  },
+  {
+    "model": "kitchen.dish",
+    "pk": 9309,
+    "fields": {
+      "name": "Банош із бринзою",
+      "description": "Кукурудзяна каша з бринзою та шкварками.",
+      "price": "195.00",
+      "dish_type": 9102,
+      "cooks": [
+        9201,
+        9203
+      ]
+    }
+  },
+  {
+    "model": "kitchen.dish",
+    "pk": 9310,
+    "fields": {
+      "name": "Львівський сирник",
+      "description": "Запечений сирник із шоколадною глазур’ю.",
+      "price": "145.00",
+      "dish_type": 9103,
+      "cooks": [
+        9205
+      ]
+    }
+  },
+  {
+    "model": "kitchen.dish",
+    "pk": 9311,
+    "fields": {
+      "name": "Медівник",
+      "description": "Медові коржі зі сметанним кремом.",
+      "price": "150.00",
+      "dish_type": 9103,
+      "cooks": [
+        9203,
+        9205
+      ]
+    }
+  },
+  {
+    "model": "kitchen.dish",
+    "pk": 9312,
+    "fields": {
+      "name": "Сирники з ягодами",
+      "description": "Сирники з ягідним соусом.",
+      "price": "155.00",
+      "dish_type": 9103,
+      "cooks": [
+        9201,
+        9205
+      ]
+    }
+  }
+]
